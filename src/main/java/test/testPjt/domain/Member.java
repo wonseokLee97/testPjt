@@ -2,13 +2,12 @@ package test.testPjt.domain;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
-@Entity(name = "member")
+@Entity
 @Builder
 public class Member {
 
@@ -22,5 +21,8 @@ public class Member {
 
     @Column(nullable = false, length = 30)
     private String password;
+
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>();
 
 }

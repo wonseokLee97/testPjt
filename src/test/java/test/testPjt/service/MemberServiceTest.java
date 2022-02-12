@@ -4,13 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import test.testPjt.domain.Member;
 import test.testPjt.repository.MemberRepository;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @WebAppConfiguration
 @SpringBootTest
@@ -42,7 +39,7 @@ class MemberServiceTest {
                 .build();
 
         Member member2 = Member.builder()
-                .username("kim2")
+                .username("kim1")
                 .password("1234")
                 .build();
 
