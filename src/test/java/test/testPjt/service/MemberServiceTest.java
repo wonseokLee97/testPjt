@@ -25,7 +25,6 @@ class MemberServiceTest {
                         .username("test")
                         .password("1234")
                         .build();
-
         Member member1 = memberRepository.save(member);
         System.out.println(member1.toString() + "!!!");
     }
