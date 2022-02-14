@@ -1,32 +1,23 @@
 package test.testPjt.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
-@Builder
 public class Post {
 
     @Id @GeneratedValue
     @Column(name = "post_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member; // fk
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Status status;
-
-    @CreatedDate
-    private String createdTime;
 
     @Column(nullable = false, length = 30)
     private String title;
@@ -37,5 +28,27 @@ public class Post {
     @Column(nullable = false, length = 25)
     private Long reward;
 
-    private LocalDateTime postTime;
+    private String writer;
+    private LocalDateTime createdTime = LocalDateTime.now();
+    private LocalDateTime editedTime;
+    private char deleteYN;
+
+    @Builder
+    public Post(String title, String content, char deleteYN, Long reward, String writer) {
+        this.title = title;
+        this.content = content;
+        this.reward = reward;
+        this.deleteYN = deleteYN;
+        this.writer = writer;
+    }
+
+    /*
+    게시글 수정
+     */
+    public void edit(String title, String content, Long reward) {
+        this.title = title;
+        this.content = content;
+        this.reward = reward;
+        this.editedTime = LocalDateTime.now();
+    }
 }

@@ -22,7 +22,6 @@ public class Member {
     @Column(nullable = false, length = 30)
     private String password;
 
-    @OneToMany(mappedBy = "member")
-    private List<Post> posts = new ArrayList<>();
-
+//    @OneToMany(mappedBy = "member")
+//    private List<Post> posts = new ArrayList<>();
 }
