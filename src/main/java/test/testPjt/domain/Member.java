@@ -21,12 +21,16 @@ public class Member {
     @Column(nullable = false, length = 30)
     private String password;
 
+    @Embedded
+    private Privacy privacy;
+
     @OneToMany(mappedBy = "member")
     private List<Post> posts = new ArrayList<>();
 
     @Builder
-    public Member(String username, String password) {
+    public Member(String username, String password, Privacy privacy) {
         this.username = username;
         this.password = password;
+        this.privacy = privacy;
     }
 }
