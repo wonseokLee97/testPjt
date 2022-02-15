@@ -52,6 +52,4 @@ public class PostService {
         entity.edit(params.getTitle(), params.getContent(), params.getReward());
         return id;
     }
-
-
 }

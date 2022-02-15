@@ -8,7 +8,6 @@ import java.util.List;
 
 @Getter @Setter
 @Entity
-@Builder
 public class Member {
 
     @Id
@@ -22,6 +21,12 @@ public class Member {
     @Column(nullable = false, length = 30)
     private String password;
 
-//    @OneToMany(mappedBy = "member")
-//    private List<Post> posts = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>();
+
+    @Builder
+    public Member(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }

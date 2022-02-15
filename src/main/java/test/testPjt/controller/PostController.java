@@ -1,37 +1,21 @@
 package test.testPjt.controller;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-import test.testPjt.DTO.PostRequestDto;
-import test.testPjt.DTO.PostResponseDto;
-import test.testPjt.service.MemberService;
-import test.testPjt.service.PostService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api")
-@RequiredArgsConstructor
-@Slf4j
+@Controller
+@RequestMapping("/post")
 public class PostController {
 
-    private final PostService postService;
-
-    @PostMapping("/posts")
-    public Long save(@RequestBody final PostRequestDto params) {
-        log.info("hi");
-        return postService.save(params);
+    @GetMapping("/list")
+    public String PostList() {
+        return "post/list";
     }
 
-    @GetMapping("/posts")
-    public List<PostResponseDto> findAll() {
-        log.info("123!!");
-        return postService.findAll();
+    @GetMapping("/write")
+    public String PostWrite() {
+        return "post/write";
     }
 
-    @PatchMapping("/posts/{id}")
-    public Long save(@PathVariable final Long id, @RequestBody final PostRequestDto params) {
-        return postService.edit(id, params);
-    }
 }

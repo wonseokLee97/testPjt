@@ -20,7 +20,6 @@ public class MemberService {
     // 회원 등록
     @Transactional
     public void register(Member member) {
-
         validateDuplicateMember(member);
         memberRepository.save(member);
     }
