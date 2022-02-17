@@ -1,17 +1,20 @@
 package test.testPjt.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import test.testPjt.DTO.MemberRequestDTO;
+import test.testPjt.DTO.MemberResponseDTO;
 import test.testPjt.domain.Member;
 import test.testPjt.domain.Privacy;
+import test.testPjt.repository.MemberRepository;
 import test.testPjt.service.MemberService;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,19 +22,20 @@ import test.testPjt.service.MemberService;
 @Slf4j
 public class MemberController {
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     @GetMapping("/register")
-    public String createForm(Model model){
+    public String createForm(Model model) {
         log.info("hi!@#");
-        model.addAttribute("memberForm", new MemberForm());
+        model.addAttribute("memberForm", new MemberRequestDTO());
         return "member/createForm";
     }
 
     @PostMapping("/register")
-    public String create(@Validated MemberForm form,
+    public String create(@Validated MemberRequestDTO form,
                          BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             log.info("erros = {}", bindingResult.getAllErrors());
             return "member/createForm";
         }
@@ -48,6 +52,12 @@ public class MemberController {
         return "redirect:/";
     }
 
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<MemberResponseDTO> members = memberService.findAll();
+        model.addAttribute("members", members);
+        return "member/memberList";
+    }
 
 
 //    @PostMapping("/register")
