@@ -26,9 +26,8 @@ public class PostService {
 
     // 게시물 등록
     @Transactional
-    public Long save(PostRequestDto param) {
-        Post entity = postRepository.save(param.toEntity());
-        return entity.getId();
+    public void save(Post post) {
+        postRepository.save(post);
     }
 
     // 게시글 조회
