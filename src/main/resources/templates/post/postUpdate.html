@@ -11,7 +11,10 @@
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
 
-    <form th:action="@{/post/write}" th:object="${post}" method="post">
+    <form th:object="${form}" method="post">
+        <!-- id -->
+        <input type="hidden" th:field="*{id}" />
+
         <div class="form-group">
             <label th:for="title">제목</label>
             <input type="text" th:field="*{title}" class="form-control" placeholder="제목을 입력하세요"
@@ -32,13 +35,14 @@
                    th:class="${#fields.hasErrors('reward')}? 'form-control fieldError' : 'form-control'">
             <p th:if="${#fields.hasErrors('reward')}" th:errors="*{reward}">Incorrect data</p>
         </div>
-        <button type="submit" class="btn btn-primary">등록</button>
+        <button type="submit" class="btn btn-primary">글 수정</button>
+
     </form>
-    <br/>
+    </br>
     <div th:replace="fragments/footer :: footer" />
 
-</div> <!-- /container -->
 
+</div> <!-- /container -->
 
 </body>
 </html>

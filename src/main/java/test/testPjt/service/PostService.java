@@ -30,18 +30,26 @@ public class PostService {
         postRepository.save(post);
     }
 
-    // 게시글 조회
+    // 게시판 조회
     public List<PostResponseDto> findAll(){
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<PostResponseDto> PostList = new ArrayList<>();
         List<Post> list = postRepository.findAll(sort); // post 리스트
 
-        List<PostResponseDto> PostList = new ArrayList<>();
 
         for(Post entity : list){
             PostList.add(new PostResponseDto(entity));
         }
 
         return PostList;
+    }
+
+    // 게시물 조회
+    public PostResponseDto findOne(Long postId){
+        Post entity = postRepository.findById(postId).orElseThrow();
+        PostResponseDto postDetail = new PostResponseDto(entity);
+
+        return postDetail;
     }
 
     // 게시물 수정

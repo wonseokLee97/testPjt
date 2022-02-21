@@ -32,11 +32,11 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public String create(@Validated MemberRequestDTO form,
-                         BindingResult bindingResult) {
+    public String create(@Validated @ModelAttribute("memberForm") MemberRequestDTO form,
+                         BindingResult result) {
+        log.info("1234!@#");
 
-        if (bindingResult.hasErrors()) {
-            log.info("erros = {}", bindingResult.getAllErrors());
+        if (result.hasErrors()) {
             return "member/createForm";
         }
 
@@ -48,6 +48,7 @@ public class MemberController {
                 .privacy(privacy)
                 .build();
 
+        log.info("pass1!");
         memberService.register(member);
         return "redirect:/";
     }

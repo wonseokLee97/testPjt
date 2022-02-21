@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<style>
+.paging-div {
+    padding: 15px 0 5px 10px;
+    display: table;
+    float: right;
+}
+</style>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <table class="table">
+        <thead>
+        <tr>
+        <th th:text="${form.title}"
+            style= "text-align:left">
+        </th>
+        </tr>
+        <tr>
+            <td th:text="${form.content}"
+                style= "text-align:left; height:350px;"></td>
+        </tr>
+        <tr>
+            <td th:text="${form.reward}"
+                style= "text-align:left"></td>
+        </tr>
+        </thead>
+    </table>
+    <div class="paging-div">
+        <td>
+        </td>
+    </div>
+
+    <div th:replace="fragments/footer :: footer" />
+    <a href="#" th:href="@{/post/{id}/edit(id=${form.id})}" class="btn float-right btn-primary" role="button">글 수정</a>
+
+</div> <!-- /container -->
+</body>
+</html>

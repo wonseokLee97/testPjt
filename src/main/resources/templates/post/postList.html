@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<style>
+    .title{
+      width        : 350px;     /* 너비는 변경될수 있습니다. */
+      text-overflow: ellipsis;  /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
+      white-space  : nowrap;    /* 줄바꿈을 하지 않습니다. */
+      overflow     : hidden;    /* 내용이 길면 감춤니다 */
+      display      : block;     /* ie6이상 현재요소를 블럭처리합니다. */
+    }
+    .date{
+      width        : 130px;     /* 너비는 변경될수 있습니다. */
+      text-overflow: ellipsis;  /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
+      white-space  : nowrap;    /* 줄바꿈을 하지 않습니다. */
+      overflow     : hidden;    /* 내용이 길면 감춤니다 */
+      display      : block;     /* ie6이상 현재요소를 블럭처리합니다. */
+    }
+    .paging-div {
+        padding: 15px 0 5px 10px;
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+</style>
+
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr style= "text-align:center;">
+                <th>번호</th>
+                <th>제목</th>
+                <th>현상금</th>
+                <th>작성일자</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="post : ${posts}">
+                <td th:text="${post.id}"
+                    style= "text-align:center"></td>
+                <td>
+                    <a th:href = "@{/post/{id}/detail (id=${post.id})}"
+                       th:text="${post.title}"
+                       style = "text-align:left"
+                       th:class = "title">
+                    </a>
+                </td>
+                <td th:text="${post.reward}"
+                    style = "text-align:center"></td>
+                <td th:text="${post.createdTime}"
+                    style = "text-align:center"
+                    th:class = "date"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+    <a href="#" th:href="@{/post/write}" class="btn float-right btn-primary" role="button">글 쓰기</a>
+
+    <div class="paging-div">
+        <ul class="pagination" id="pagination">
+            <li><a href="#">1</a><li>
+            <li><a href="#">2</a><li>
+            <li><a href="#">3</a><li>
+            <li><a href="#">4</a><li>
+            <li><a href="#">5</a><li>
+        </ul>
+    </div>
+</div> <!-- /container -->
+
+
+</body>
+</html>

@@ -19,7 +19,7 @@ public class Post {
     @JoinColumn(name = "member_id")
     private Member member; // fk
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 70)
     private String title;
 
     @Column(nullable = false, length = 500)
@@ -34,7 +34,8 @@ public class Post {
     private char deleteYN;
 
     @Builder
-    public Post(String title, String content, char deleteYN, Long reward, String writer) {
+    public Post(Long id, String title, String content, char deleteYN, Long reward, String writer) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.reward = reward;

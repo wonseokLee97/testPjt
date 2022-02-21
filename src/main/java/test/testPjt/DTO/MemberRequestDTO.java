@@ -13,6 +13,7 @@ public class MemberRequestDTO {
 
     @NotEmpty(message = "비밀번호는 필수기입 항목입니다.")
     private String password;
+
     private String phoneNum;
     private String email;
 
