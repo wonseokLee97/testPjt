@@ -54,9 +54,8 @@ public class PostService {
 
     // 게시물 수정
     @Transactional
-    public Long edit(Long id, PostRequestDto params) {
+    public void edit(Long id, PostRequestDto params) {
         Post entity = postRepository.findById(id).orElseThrow();
         entity.edit(params.getTitle(), params.getContent(), params.getReward());
-        return id;
     }
 }

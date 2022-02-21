@@ -78,14 +78,7 @@ public class PostController {
 
     @PostMapping("/{postId}/edit")
     public String updatePost(@PathVariable Long postId, @ModelAttribute("form") PostRequestDto form) {
-        Post post = Post.builder()
-                .id(postId)
-                .title(form.getTitle())
-                .content(form.getContent())
-                .reward(form.getReward())
-                .build();
-
-        postService.save(post);
+        postService.edit(postId, form);
         return "redirect:/post/list";
     }
 }
