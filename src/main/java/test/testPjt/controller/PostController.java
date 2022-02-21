@@ -46,7 +46,7 @@ public class PostController {
                 .build();
 
         postService.save(post);
-        return "redirect:/";
+        return "redirect:/post/list";
     }
 
     // 게시판 조회
@@ -86,6 +86,6 @@ public class PostController {
                 .build();
 
         postService.save(post);
-        return "redirect:/";
+        return "redirect:/post/list";
     }
 }
