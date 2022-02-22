@@ -26,7 +26,13 @@ public class PostService {
 
     // 게시물 등록
     @Transactional
-    public void save(Post post) {
+    public void save(PostRequestDto form) {
+
+        Post post = Post.builder()
+                .title(form.getTitle())
+                .content(form.getContent())
+                .reward(form.getReward())
+                .build();
         postRepository.save(post);
     }
 
@@ -54,8 +60,15 @@ public class PostService {
 
     // 게시물 수정
     @Transactional
-    public void edit(Long id, PostRequestDto params) {
+    public void edit(Long id, PostRequestDto form) {
         Post entity = postRepository.findById(id).orElseThrow();
-        entity.edit(params.getTitle(), params.getContent(), params.getReward());
+        entity.edit(form.getTitle(), form.getContent(), form.getReward());
     }
+
+    // 찜하기
+    public void heart(Long id){
+        Post post = postRepository.findById(id).orElseThrow();
+    }
+
+
 }

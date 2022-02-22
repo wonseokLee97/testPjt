@@ -38,14 +38,7 @@ public class PostController {
             log.info("erros = {}", bindingResult.getAllErrors());
             return "post/writeForm";
         }
-
-        Post post = Post.builder()
-                .title(form.getTitle())
-                .content(form.getContent())
-                .reward(form.getReward())
-                .build();
-
-        postService.save(post);
+        postService.save(form);
         return "redirect:/post/list";
     }
 
@@ -62,7 +55,6 @@ public class PostController {
     public String detailPost(@PathVariable("postId") Long postId, Model model) {
         PostResponseDto form = postService.findOne(postId);
         model.addAttribute("form", form);
-        log.info("success!!...");
         return "post/postDetail";
     }
 
@@ -72,7 +64,6 @@ public class PostController {
 
         PostResponseDto form = postService.findOne(postId);
         model.addAttribute("form", form);
-        log.info("success!!123...");
         return "post/postUpdate";
     }
 
@@ -80,5 +71,12 @@ public class PostController {
     public String updatePost(@PathVariable Long postId, @ModelAttribute("form") PostRequestDto form) {
         postService.edit(postId, form);
         return "redirect:/post/list";
+    }
+
+    // 찜하기
+    @GetMapping("/{postId}/heart")
+    public String heartPost(@PathVariable Long postId){
+//        postService.heart(postId);
+        return "redirect:/post/{postId}/detail";
     }
 }
